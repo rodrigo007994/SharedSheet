@@ -1,0 +1,13 @@
+-- Table: tags
+
+-- DROP TABLE tags;
+
+CREATE TABLE worklist
+(
+  id serial NOT NULL,
+  col001 character varying(200),
+  col002 character varying(200),
+  col003 character varying(200),
+  col004 character varying(200),
+  CONSTRAINT worklist_pkey PRIMARY KEY (id)
+)

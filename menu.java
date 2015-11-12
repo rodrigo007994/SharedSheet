@@ -29,19 +29,19 @@ public class menu{
         rs=null;
         try{
             Class.forName("org.postgresql.Driver");
-            conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/ingsuroo","inguser", "baruna");
+            conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/sheetsdb","tom", "myPassword");
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT id_areas, nombre_areas, division_areas FROM areas;");
+			rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';");
 			JMenuItem item = null;
 			while(rs.next()){ ///
-				item = new JMenuItem(rs.getString("nombre_areas"));
+				item = new JMenuItem(rs.getString("table_name"));
 				item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
 				String command=event.paramString();
 				command=command.substring(command.indexOf("cmd=")+4);
 				command=command.substring(0,command.indexOf(","));
-                System.out.println(command);
+				System.out.println(command);
             }
         });
 				menu1.add(item);
