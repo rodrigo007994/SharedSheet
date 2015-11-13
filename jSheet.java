@@ -33,17 +33,24 @@ public static void setSheet(String sheetName){
 		scrollFrame.setPreferredSize(new Dimension(800,600));
 	
 	JTextField txtfield;
+	
 	int rows=0;
 	for(int c=0;c<sheetData.length&&sheetData[c][0]!=null;c++){
 		for(int r=0;r<257;r++){
 			txtfield=new JTextField("");
 			////////////////EVENT ENTER
+			int colnum=c;
+			int rownum=r;
+			txtfield.putClientProperty( "col", c );
+			txtfield.putClientProperty( "row", r );
 			txtfield.addKeyListener(new KeyAdapter() {
             
             public void keyReleased(KeyEvent event) {
 				System.out.println(event.getKeyCode());
 				if(event.getKeyCode()==10){
-					System.out.println("Save the field");
+					System.out.println((Integer)((JTextField)event.getSource()).getClientProperty( "col" ));
+					System.out.println((Integer)((JTextField)event.getSource()).getClientProperty( "row" ));
+					System.out.println(((JTextField)event.getSource()).getText());
 					}
             }
         });
