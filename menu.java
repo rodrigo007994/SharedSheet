@@ -33,7 +33,7 @@ public class menu{
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';");
 			JMenuItem item = null;
-			while(rs.next()){ ///
+			while(rs.next()){
 				item = new JMenuItem(rs.getString("table_name"));
 				item.addActionListener(new ActionListener() {
             @Override
@@ -41,7 +41,7 @@ public class menu{
 				String command=event.paramString();
 				command=command.substring(command.indexOf("cmd=")+4);
 				command=command.substring(0,command.indexOf(","));
-				System.out.println(command);
+				jSheet.setSheet(command);
             }
         });
 				menu1.add(item);
@@ -54,6 +54,20 @@ public class menu{
         }catch(SQLException e2){
             System.out.println( e2.getClass().getName()+": "+ e2.getMessage() );
             return null;
+        }
+        if(stmt!=null){
+            try{
+                stmt.close();
+            }catch(SQLException e2){
+                System.out.println( e2.getClass().getName()+": "+ e2.getMessage() );
+            }
+        }
+        if(conn!=null){
+            try{
+                conn.close();
+            }catch(SQLException e2){
+                System.out.println( e2.getClass().getName()+": "+ e2.getMessage() );
+            }
         }
         return menu1;
 	}

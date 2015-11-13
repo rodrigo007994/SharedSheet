@@ -24,7 +24,7 @@ public class guisheet extends JFrame {
             @Override
             public void run() {
                 guisheet ex = new guisheet();
-                
+                ex.pack();
                 ex.setVisible(true);
             }
         });
