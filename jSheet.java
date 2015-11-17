@@ -63,6 +63,7 @@ public static void setSheet(String sheetName){
 					String value=((JTextField)event.getSource()).getText();
 					if(queryFunctions.updateCell(row,col,sheet,value)){
 						((JTextField)event.getSource()).setBackground(Color.GREEN);
+						frame1.setVisible(true);
 					}else{
 						((JTextField)event.getSource()).setBackground(Color.RED);
 					}

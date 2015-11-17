@@ -23,9 +23,9 @@ public class menu{
 		newitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-				Object result = JOptionPane.showInputDialog(new JFrame(), "Nombre de la nueva hoja de calculo: ");
+				Object result = JOptionPane.showInputDialog(new JFrame(), "Name of the new Sheet: ");
 				System.out.println(result.toString());
-				Object result2 = JOptionPane.showInputDialog(new JFrame(), "Numero de filas: ");
+				Object result2 = JOptionPane.showInputDialog(new JFrame(), "Number of rows: ");
 				System.out.println(result2.toString());
 				queryFunctions.newTable(result.toString(),Integer.parseInt(result2.toString()));
             }
@@ -51,7 +51,7 @@ public class menu{
             Class.forName("org.postgresql.Driver");
             conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/sheetsdb","tom", "myPassword");
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';");
+			rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE' AND table_name!='records';");
 			JMenuItem item = null;
 			while(rs.next()){
 				item = new JMenuItem(rs.getString("table_name"));
