@@ -1,3 +1,5 @@
+
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -8,15 +10,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class menu{
 	
-	public static JMenuBar menubar(){
+	public static void menubar(JFrame frame1){
 		JMenuBar outMenuBar = new JMenuBar();
 		JMenu menu1 = new JMenu("Sheets");
+		JMenu menu2 = new JMenu("Files");
+		
+		JMenuItem newitem = new JMenuItem("New Sheet");
+		newitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+				Object result = JOptionPane.showInputDialog(new JFrame(), "Nombre de la nueva hoja de calculo: ");
+				System.out.println(result.toString());
+				Object result2 = JOptionPane.showInputDialog(new JFrame(), "Numero de filas: ");
+				System.out.println(result2.toString());
+				queryFunctions.newTable(result.toString(),Integer.parseInt(result2.toString()));
+            }
+        });
+		
+		menu2.add(newitem);
+		
 		menu1=addItems(menu1);
+		outMenuBar.add(menu2);
 		outMenuBar.add(menu1);
-		return outMenuBar;
+		frame1.setJMenuBar(outMenuBar);
 		}
 		
 	public static JMenu addItems(JMenu menu1){
